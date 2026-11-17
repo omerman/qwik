@@ -138,8 +138,6 @@ export const CLICKABLE_ON_ALL_AT_ONCE: Fixture[] = [...MATRIX, USER_IMPORT, MODA
   (fixture) => ({ ...fixture, path: '/all-at-once/' })
 );
 
-const NEVER_UPDATES =
-  'never shows its result on main: a sync computed reading an async computed prop stays at 0';
 const JSX_ONLY =
   'one round trip on main: the signal is only read in JSX, so the click only needs its handler';
 const COMPUTEDS_WITH_HANDLER =
@@ -153,10 +151,7 @@ const TASKS_FOUND_LEVEL_BY_LEVEL =
 const RENDER_FOUND_AFTER_TASK =
   "over the 2-round-trip cap on main: the modal's task loads first, and its render chunk is only found once the task has run";
 
-export const NEVER_SHOWS_RESULT: Record<string, string> = {
-  'tree/mixed-computed-chain': NEVER_UPDATES,
-  'tree-context/mixed-computed-chain': NEVER_UPDATES,
-};
+export const NEVER_SHOWS_RESULT: Record<string, string> = {};
 
 export type RoundTripsOnMain = { roundTrips: number; reason: string };
 
@@ -172,6 +167,8 @@ export const ROUND_TRIPS_ON_MAIN: Record<string, RoundTripsOnMain> = {
   'tree-context/visible-task-chain': { roundTrips: 1, reason: NO_HANDLER_TO_FETCH },
   'single/async-computed-chain': { roundTrips: 1, reason: COMPUTEDS_WITH_HANDLER },
   'single/mixed-computed-chain': { roundTrips: 1, reason: COMPUTEDS_WITH_HANDLER },
+  'tree/mixed-computed-chain': { roundTrips: 1, reason: COMPUTEDS_WITH_HANDLER },
+  'tree-context/mixed-computed-chain': { roundTrips: 1, reason: COMPUTEDS_WITH_HANDLER },
   'single/store-chain': { roundTrips: 1, reason: TASKS_WITH_HANDLER },
   'single/task-chain': { roundTrips: 1, reason: TASKS_WITH_HANDLER },
   'single/all': { roundTrips: 1, reason: TASKS_WITH_HANDLER },
